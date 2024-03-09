@@ -1,0 +1,128 @@
+l<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Site de Vídeos</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            width: 100%;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            width: 100%;
+        }
+
+        /* Adicione estilos específicos conforme necessário */
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Meu Site de Vídeos</h1>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#adicionar-video">Adicionar Vídeo</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="home">
+    <h2>Bem-vindo ao Meu Site de Vídeos!</h2>
+    <p>Veja os vídeos disponíveis abaixo.</p>
+
+    <ul id="video-list">
+        <!-- Lista de vídeos aparecerá aqui -->
+    </ul>
+</section>
+
+<section id="adicionar-video">
+    <h2>Adicionar Vídeo</h2>
+    <input type="file" id="video-file" accept="video/*" required>
+    <button onclick="adicionarVideo()">Adicionar</button>
+</section>
+
+<footer>
+    <p>&copy; 2024 Meu Site de Vídeos. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    function adicionarVideo() {
+        const fileInput = document.getElementById('video-file');
+        const videoList = document.getElementById('video-list');
+
+        if (fileInput.files.length > 0) {
+            const videoURL = URL.createObjectURL(fileInput.files[0]);
+
+            const listItem = document.createElement('li');
+            const videoElement = document.createElement('video');
+            videoElement.width = 320;
+            videoElement.height = 240;
+            videoElement.controls = true;
+
+            const sourceElement = document.createElement('source');
+            sourceElement.src = videoURL;
+            sourceElement.type = 'video/mp4';
+
+            videoElement.appendChild(sourceElement);
+            listItem.appendChild(videoElement);
+            videoList.appendChild(listItem);
+
+            fileInput.value = ''; // Limpar o campo de arquivo após adicionar
+        } else {
+            alert('Selecione um arquivo de vídeo antes de adicionar.');
+        }
+    }
+</script>
+
+</body>
+</html>
